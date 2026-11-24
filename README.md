@@ -23,14 +23,19 @@ AI agents holding `USDC`, `ETH`, `SOL`, `BTC`, `USDT`, or `TON` wallets face irr
 
 ## Quick Connect
 
-### 1. Hosted `x402` Streamable HTTP MCP (MCPize / Base `USDC`)
+- **Glama MCP Directory (`v0.1.0` Live)**: **[https://glama.ai/mcp/servers/2848823170/web3-tx-guard-mcp](https://glama.ai/mcp/servers/2848823170/web3-tx-guard-mcp)**
+- **Apify Store Actor (`Pay-Per-Event` & Standby MCP)**: **[https://apify.com/shulang-chen/web3-tx-guard-mcp](https://apify.com/shulang-chen/web3-tx-guard-mcp)**
+- **24/7 Self-Hosted Streamable HTTP MCP**: **`https://caps-tuner-mid-conditioning.trycloudflare.com/mcp`**
+- **Direct `0%`-Fee `x402` Base `USDC` Gateway**: **`https://scenes-spencer-dresses-font.trycloudflare.com/mcp`** ([`x402-web3-fin-gateway`](https://github.com/2848823170/x402-web3-fin-gateway))
+
+### 1. Remote Streamable HTTP MCP (Claude Desktop / Cursor / Windsurf / `x402` Agents)
 
 ```json
 {
   "mcpServers": {
     "web3-tx-guard": {
       "type": "streamable-http",
-      "url": "https://web3-tx-guard-mcp.mcpize.run/mcp"
+      "url": "https://caps-tuner-mid-conditioning.trycloudflare.com/mcp"
     }
   }
 }
