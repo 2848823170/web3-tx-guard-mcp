@@ -32,3 +32,6 @@ pricing:
     - name: audit_eip712_signature_payload
       price: "0.01"
       description: Audit off-chain eth_signTypedData_v4 payloads (EIP-2612 Permit, Permit2, Seaport, EIP-3009 x402, SafeTx, ForwardRequest) for blind-signing drains, unlimited allowances, and domain spoofing.
+    - name: scan_token_rug_risk
+      price: "0.01"
+      description: Live on-chain Base Mainnet ERC-20 and Solana SPL / Token-2022 token honeypot, mint/freeze authority, EIP-1967 proxy, DEX liquidity, and whale concentration scanner.

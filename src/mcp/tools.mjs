@@ -10,6 +10,7 @@
 import { auditEip712SignaturePayload } from '../core/eip712-audit.mjs';
 import { decodeAndAuditEvmCalldata } from '../core/evm-calldata.mjs';
 import { validateMultichainAddress } from '../core/multichain-address.mjs';
+import { scanOnChainTokenRugRisk } from '../core/token-rug-scanner.mjs';
 
 export const MCP_TOOLS = [
   {
@@ -134,6 +135,36 @@ export const MCP_TOOLS = [
       destructiveHint: false,
       idempotentHint: true,
       openWorldHint: false,
+    },
+  },
+  {
+    name: 'scan_token_rug_risk',
+    title: 'Scan Live Base & Solana Token Honeypot, Rug-Pull & Liquidity Risk',
+    description:
+      'Live on-chain token security oracle for autonomous trading agents (`ElizaOS`, `Coinbase AgentKit`, `Virtuals`, `GOAT`). Queries Base Mainnet (`8453`) and Solana Mainnet RPCs to detect EIP-1967 upgradeable proxies, unrenounced `owner()`, `SELFDESTRUCT`/`DELEGATECALL`/blacklist/fee-setter bytecode selectors, Uniswap V2/V3 & Aerodrome reserve depth + LP burn %, live `eth_call` `transfer()` honeypot simulation, Solana `mintAuthority`/`freezeAuthority`, Token-2022 `permanentDelegate`/`transferFeeConfig`/`transferHook` traps, and Top-1/Top-5/Top-10 holder concentration.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        tokenAddress: {
+          type: 'string',
+          description:
+            'Base Mainnet ERC-20 contract address (0x + 40 hex) or Solana SPL / Token-2022 mint address (32–44 Base58 chars).',
+        },
+        chain: {
+          type: 'string',
+          enum: ['auto', 'base', 'solana'],
+          description: 'Target chain: auto (default), base, or solana.',
+          default: 'auto',
+        },
+      },
+      required: ['tokenAddress'],
+    },
+    annotations: {
+      title: 'Scan Live Token Rug & Honeypot Risk ($0.01)',
+      readOnlyHint: true,
+      destructiveHint: false,
+      idempotentHint: true,
+      openWorldHint: true,
     },
   },
 ];
@@ -263,6 +294,44 @@ export async function executeCommercialTool(
         findingCount: audit.findings.length,
       },
       audit,
+    };
+    return { payload, billing: chargeReceipt };
+  }
+
+  if (toolName === 'scan_token_rug_risk') {
+    if (!args.tokenAddress || typeof args.tokenAddress !== 'string' || !args.tokenAddress.trim()) {
+      throw new Error('`scan_token_rug_risk` requires a non-empty `tokenAddress` string.');
+    }
+    preCheckBudget('scan-token-rug-risk');
+
+    const scan = await scanOnChainTokenRugRisk({
+      tokenAddress: args.tokenAddress,
+      chain: args.chain || 'auto',
+    });
+
+    const chargeReceipt = meter
+      ? await meter.charge({ eventName: 'scan-token-rug-risk', count: 1, idempotencyKey })
+      : null;
+    if (chargeReceipt && !chargeReceipt.charged) {
+      throw new Error(`Pay-Per-Event spending limit reached (${chargeReceipt.reason}).`);
+    }
+
+    const payload = {
+      tool: toolName,
+      status: 'ok',
+      billing: chargeReceipt,
+      summary: {
+        chain: scan.chain,
+        tokenAddress: scan.tokenAddress,
+        symbol: scan.token?.symbol || null,
+        safeToTrade: scan.safeToTrade,
+        recommendation: scan.recommendation,
+        riskLevel: scan.riskLevel,
+        riskScore: scan.riskScore,
+        findingCount: scan.findings.length,
+        latencyMs: scan.latencyMs,
+      },
+      scan,
     };
     return { payload, billing: chargeReceipt };
   }

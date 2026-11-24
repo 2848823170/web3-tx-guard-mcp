@@ -21,6 +21,13 @@
     }
   },
   {
+    "scan-token-rug-risk": {
+      "eventTitle": "Scan Live Base & Solana Token Rug/Honeypot Risk",
+      "eventDescription": "Charged per execution of scan_token_rug_risk across Base Mainnet ERC-20 and Solana SPL / Token-2022 mints.",
+      "eventPriceUsd": 0.01
+    }
+  },
+  {
     "actor-start": {
       "eventTitle": "Actor Batch Run Initialization",
       "eventDescription": "Flat initialization charge covering container boot overhead on standalone batch runs.",

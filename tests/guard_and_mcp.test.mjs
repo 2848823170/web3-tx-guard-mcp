@@ -530,7 +530,7 @@ test('5. MCP stdio CLI binary handles newline JSON-RPC & Content-Length framing 
     child.stdin.write(`${JSON.stringify({ jsonrpc: '2.0', id: 2, method: 'tools/list', params: {} })}\n`);
     await waitFor(2);
     assert.equal(responses[0].result.protocolVersion, '2025-06-18');
-    assert.equal(responses[1].result.tools.length, 3);
+    assert.equal(responses[1].result.tools.length, 4);
 
     const callBody = JSON.stringify({
       jsonrpc: '2.0',
