@@ -1,0 +1,31 @@
+{
+  "actorSpecification": 1,
+  "fields": {
+    "type": "object",
+    "properties": {
+      "tool": { "type": "string", "title": "Executed Tool" },
+      "status": { "type": "string", "title": "Status" },
+      "billedEvent": { "type": "string", "title": "PPE Event Charged" },
+      "billedUsd": { "type": "number", "title": "Event Price (USD)" },
+      "summary": { "type": "object", "title": "Security Verdict Summary" }
+    }
+  },
+  "views": {
+    "overview": {
+      "title": "Security Audit & Billing Overview",
+      "transformation": {
+        "fields": ["tool", "status", "billedEvent", "billedUsd", "summary"]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "tool": { "label": "Tool", "format": "text" },
+          "status": { "label": "Status", "format": "text" },
+          "billedEvent": { "label": "PPE Event", "format": "text" },
+          "billedUsd": { "label": "Price ($ USD)", "format": "number" },
+          "summary": { "label": "Security Summary", "format": "object" }
+        }
+      }
+    }
+  }
+}

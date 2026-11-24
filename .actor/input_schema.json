@@ -1,0 +1,84 @@
+{
+  "title": "Web3 Tx Guard MCP Actor Input",
+  "description": "Run directly as a Pay-Per-Event batch Actor or connect via Standby Streamable HTTP MCP at /mcp.",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "tool": {
+      "title": "Security Tool to Execute (Batch Mode)",
+      "type": "string",
+      "description": "Select which Web3 pre-flight guard tool to execute in batch mode. In Standby mode, MCP clients call tools directly via /mcp.",
+      "editor": "select",
+      "default": "validate_multichain_address",
+      "enum": [
+        "validate_multichain_address",
+        "decode_and_audit_evm_calldata",
+        "audit_eip712_signature_payload"
+      ],
+      "enumTitles": [
+        "Validate Multichain Wallet Address ($0.01)",
+        "Decode & Audit EVM Transaction Calldata ($0.01)",
+        "Audit EIP-712 Typed-Data Signature Payload ($0.01)"
+      ]
+    },
+    "address": {
+      "title": "Wallet / Contract Address (validate_multichain_address)",
+      "type": "string",
+      "description": "Address string to validate across EVM, Tron, Bitcoin, Solana, TON, XRPL, Cosmos, or Stacks.",
+      "editor": "textfield",
+      "default": ""
+    },
+    "chain": {
+      "title": "Expected Chain Hint (Optional)",
+      "type": "string",
+      "description": "Optional chain constraint: auto, evm, tron, bitcoin, solana, ton, xrpl, cosmos, or stacks.",
+      "editor": "textfield",
+      "default": "auto"
+    },
+    "expectedNetwork": {
+      "title": "Expected Network Environment",
+      "type": "string",
+      "description": "Expected network environment (mainnet or testnet) to catch testnet-vs-mainnet mixups.",
+      "editor": "select",
+      "default": "mainnet",
+      "enum": ["mainnet", "testnet", "any"],
+      "enumTitles": ["Mainnet", "Testnet", "Any"]
+    },
+    "to": {
+      "title": "EVM Target Contract / Recipient Address (decode_and_audit_evm_calldata)",
+      "type": "string",
+      "description": "Target 0x address for EVM transaction pre-flight analysis.",
+      "editor": "textfield",
+      "default": ""
+    },
+    "value": {
+      "title": "Native ETH / Token Value in Wei (Decimal or 0x Hex)",
+      "type": "string",
+      "description": "Transaction value in wei (e.g. '0' or '0x0').",
+      "editor": "textfield",
+      "default": "0"
+    },
+    "data": {
+      "title": "Raw EVM Hex Calldata (0x...)",
+      "type": "string",
+      "description": "Hex-encoded EVM transaction calldata starting with 0x.",
+      "editor": "textarea",
+      "default": "0x"
+    },
+    "chainId": {
+      "title": "EVM Chain ID",
+      "type": "integer",
+      "description": "EVM Chain ID (e.g. 1 = Ethereum, 8453 = Base, 42161 = Arbitrum, 137 = Polygon).",
+      "editor": "number",
+      "default": 8453
+    },
+    "typedData": {
+      "title": "EIP-712 TypedData v4 Payload (audit_eip712_signature_payload)",
+      "type": "object",
+      "description": "Full eth_signTypedData_v4 JSON object containing domain, types, primaryType, and message.",
+      "editor": "json",
+      "default": {}
+    }
+  },
+  "required": ["tool"]
+}

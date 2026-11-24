@@ -1,0 +1,10 @@
+node_modules
+storage
+tmp
+.git
+.github
+.mcpize
+tests
+*.log
+.DS_Store
+.env

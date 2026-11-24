@@ -1,0 +1,30 @@
+[
+  {
+    "validate-multichain-address": {
+      "eventTitle": "Validate Multichain Address",
+      "eventDescription": "Charged per execution of validate_multichain_address across EVM, Tron, Bitcoin, Solana, TON, XRPL, Cosmos, and Stacks.",
+      "eventPriceUsd": 0.01
+    }
+  },
+  {
+    "decode-audit-evm-calldata": {
+      "eventTitle": "Decode & Audit EVM Calldata",
+      "eventDescription": "Charged per execution of decode_and_audit_evm_calldata for ERC-20/721/1155, Permit2, DEX router, Multicall, and Safe transactions.",
+      "eventPriceUsd": 0.01
+    }
+  },
+  {
+    "audit-eip712-signature": {
+      "eventTitle": "Audit EIP-712 Signature Payload",
+      "eventDescription": "Charged per execution of audit_eip712_signature_payload for Permit, Permit2, Seaport, EIP-3009 x402, and meta-transaction typed data.",
+      "eventPriceUsd": 0.01
+    }
+  },
+  {
+    "actor-start": {
+      "eventTitle": "Actor Batch Run Initialization",
+      "eventDescription": "Flat initialization charge covering container boot overhead on standalone batch runs.",
+      "eventPriceUsd": 0.001
+    }
+  }
+]

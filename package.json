@@ -1,0 +1,50 @@
+{
+  "name": "web3-tx-guard-mcp",
+  "version": "1.0.0",
+  "description": "Deterministic Web3 & DeFi pre-flight transaction security MCP server: 8-chain cryptographic address validation, EVM calldata MEV/approval decoder, and EIP-712 blind-signing auditor.",
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "bin": {
+    "web3-tx-guard-mcp": "./bin/web3-tx-guard-mcp.mjs"
+  },
+  "main": "./src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./main": "./src/main.mjs",
+    "./tools": "./src/mcp/tools.mjs",
+    "./server": "./src/mcp/server.mjs"
+  },
+  "scripts": {
+    "start": "node ./src/index.js",
+    "start:stdio": "node ./src/index.js --stdio",
+    "start:http": "node ./src/index.js --http",
+    "dev": "node ./src/index.js --http",
+    "test": "node --test ./tests/guard_and_mcp.test.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.27.1",
+    "zod": "^4.6.7"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "web3",
+    "defi",
+    "security",
+    "x402",
+    "eip-712",
+    "permit2",
+    "calldata",
+    "evm",
+    "solana",
+    "bitcoin",
+    "tron",
+    "ton",
+    "xrpl",
+    "apify-actor",
+    "mcpize"
+  ]
+}

@@ -1,0 +1,34 @@
+version: 1
+name: web3-tx-guard-mcp
+description: Deterministic Web3 pre-flight transaction security guard for AI agents — 8-chain address checksum & burn-trap validation, EVM calldata approval/MEV decoder, and EIP-712 Permit2/Seaport blind-signature auditor.
+runtime: container
+entry: src/index.js
+
+build:
+  dockerfile: Dockerfile
+
+startCommand:
+  type: http
+  command: node
+  args:
+    - src/index.js
+    - --http
+
+bridge:
+  mode: http
+
+pricing:
+  protocol: x402
+  network: base
+  recipient: "0xfEbDbB880C7f323c145d61683874a45540208a68"
+  asset: usdc
+  tools:
+    - name: validate_multichain_address
+      price: "0.01"
+      description: Cryptographically validate and normalize wallet addresses across EVM, Tron, Bitcoin, Solana, TON, XRP Ledger, Cosmos, and Stacks with checksum, PDA, bounce-trap, and burn-risk detection.
+    - name: decode_and_audit_evm_calldata
+      price: "0.01"
+      description: Decode raw hex EVM calldata (ERC-20/721/1155, Permit2, Uniswap V2/V3/UniversalRouter, 1inch, Multicall, Safe) and flag unlimited approvals, zero-minOut MEV sandwich exposure, and delegatecall traps.
+    - name: audit_eip712_signature_payload
+      price: "0.01"
+      description: Audit off-chain eth_signTypedData_v4 payloads (EIP-2612 Permit, Permit2, Seaport, EIP-3009 x402, SafeTx, ForwardRequest) for blind-signing drains, unlimited allowances, and domain spoofing.

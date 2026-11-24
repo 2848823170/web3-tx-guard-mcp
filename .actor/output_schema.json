@@ -1,0 +1,18 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "Web3 Tx Guard MCP Output",
+  "description": "Deterministic pre-flight Web3 security verdict, decoded parameters, and risk findings.",
+  "type": "object",
+  "properties": {
+    "datasetResults": {
+      "type": "string",
+      "title": "Security Audit Dataset",
+      "template": "{{links.apiDefaultDatasetUrl}}/items"
+    },
+    "auditReportJson": {
+      "type": "string",
+      "title": "Full JSON Audit Report",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/OUTPUT.json"
+    }
+  }
+}

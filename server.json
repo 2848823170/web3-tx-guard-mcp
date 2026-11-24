@@ -1,0 +1,26 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-07-09/server.schema.json",
+  "name": "io.github.2848823170/web3-tx-guard-mcp",
+  "description": "Deterministic 8-chain wallet address validator, EVM calldata MEV/approval decoder, and EIP-712 blind-signature auditor.",
+  "version": "1.0.0",
+  "repository": {
+    "url": "https://github.com/2848823170/web3-tx-guard-mcp",
+    "source": "github"
+  },
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "web3-tx-guard-mcp",
+      "version": "1.0.0",
+      "transport": {
+        "type": "stdio"
+      }
+    }
+  ],
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://web3-tx-guard-mcp.mcpize.run/mcp"
+    }
+  ]
+}

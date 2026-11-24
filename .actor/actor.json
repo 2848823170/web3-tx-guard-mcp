@@ -1,0 +1,19 @@
+{
+  "actorSpecification": 1,
+  "name": "web3-tx-guard-mcp",
+  "title": "Web3 Tx Guard MCP — Multichain Address Checksum, EVM Calldata & EIP-712 Security Auditor",
+  "description": "Deterministic pre-flight Web3 & DeFi security MCP server & Pay-Per-Event Apify Actor: 8-chain cryptographic address validation (EVM, Tron, Bitcoin, Solana, TON, XRPL, Cosmos, Stacks), EVM calldata approval/MEV decoder, and EIP-712 Permit2/Seaport blind-signature auditor.",
+  "version": "1.0",
+  "buildTag": "latest",
+  "minMemoryMbytes": 256,
+  "maxMemoryMbytes": 512,
+  "usesStandbyMode": true,
+  "webServerMcpPath": "/mcp",
+  "dockerfile": "../Dockerfile",
+  "readme": "../README.md",
+  "input": "./input_schema.json",
+  "output": "./output_schema.json",
+  "storages": {
+    "dataset": "./dataset_schema.json"
+  }
+}
